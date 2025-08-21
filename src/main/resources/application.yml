@@ -1,0 +1,57 @@
+spring:
+  profiles:
+    active: dev
+    include: secret
+  datasource:
+    # driver-class-name: org.h2.Driver
+    # url: jdbc:h2:mem:sangjo;MODE=MySQL;
+    # username: sa
+    # password:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/db_mutual_aid?serverTimezone=UTC&characterencoding=UTF-8
+    username: mutual
+    password: MutualAid!@#$
+  jpa:
+    database-platform: org.hibernate.dialect.MySQLDialect
+    properties:
+      hibernate:
+        hibernate:
+        "[format_sql]": true            #SQL 보기 좋게 출력
+        "[user_sql_comments]": true     #SQL 생성시 주석 포함
+        "[highlight_sql]": true         #SQL 색깔
+        "[hbm2ddl.auto]": none
+    open-in-view: true
+    show-sql: true
+  data:
+    redis:
+      host: 127.0.0.1
+      port: 6379
+      password: withtec1@
+      timeout: 2000
+  mail:
+    host: smtp.gmail.com
+    port: 587 #SMTP 포트는 TLS: 587, SSL: 465 
+    username: daniel31732@gmail.com  #구글 계정 이메일
+    password: hgzr jwjz bgfn fuiz     #보안비밀번호 16코드
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+          connectiontimeout: 5000
+          timeout: 5000
+          writetimeout: 5000
+      auth-code-expiration-millis: 36000 #인증코드 유효시간 60분
+
+#JWT 인증관련 설정
+jwt:
+  header: "Authorization"
+  prefix: "Bearer "
+  secret: "WithtecdkfdisdlDdkIdd25dG4G32sjsedis&sfklsfl#kklsklFDkdjlD6ssa"
+  tokenExpirationTime: 36000
+
+sse:
+  timeout: 300000
+
