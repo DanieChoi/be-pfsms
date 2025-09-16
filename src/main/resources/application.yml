@@ -1,0 +1,78 @@
+spring:
+  profiles:
+    active: dev
+    include: secret
+  datasource:
+    # driver-class-name: org.h2.Driver
+    # url: jdbc:h2:mem:sangjo;MODE=MySQL;
+    # username: sa
+    # password:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/db_mutual_aid?serverTimezone=UTC&characterencoding=UTF-8
+    username: mutual
+    password: MutualAid!@#$
+  jpa:
+    database-platform: org.hibernate.dialect.MySQLDialect
+    properties:
+      hibernate:
+        hibernate:
+        "[format_sql]": true            #SQL 보기 좋게 출력
+        "[user_sql_comments]": true     #SQL 생성시 주석 포함
+        "[highlight_sql]": true         #SQL 색깔
+        "[hbm2ddl.auto]": none
+    open-in-view: true
+    show-sql: true
+  data:
+    redis:
+      host: 127.0.0.1
+      port: 6379
+      password: withtec1@
+      timeout: 2000
+  mail:
+    host: smtp.gmail.com
+    port: 587 #SMTP 포트는 TLS: 587, SSL: 465 
+    username: daniel31732@gmail.com  #구글 계정 이메일
+    password: hgzr jwjz bgfn fuiz     #보안비밀번호 16코드
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+          connectiontimeout: 5000
+          timeout: 5000
+          writetimeout: 5000
+      auth-code-expiration-millis: 36000 #인증코드 유효시간 60분
+
+#swagger-ui 설정
+springdoc:
+  # 특정 패키지 컨트롤러만 스캔
+  packages-to-scan: com.withtec.pfsms
+  # API가 생성 및 소비하는 기본 미디어 타입 지정
+  default-consumes-media-type: application/json;charset=UTF-8
+  default-produces-media-type: application/json;charset=UTF-8
+  cache:
+    disabled: true          # OpenAPI 문서 생성을 위한 캐싱 설정(true = 비활성화)
+  # OpenAPI 명세 문서의 경로 설정(기본값 = /v3/api-docs)
+  api-docs:
+    path: /api-docs/json
+    groups:
+      enabled: true         # API 그룹화를 활성화
+  swagger-ui:
+    enabled: true           # Swagger UI 활성화 여부
+    path: /swagger-ui.html  # Swagger UI 경로 설정(기본값 = /Swagger-ui.htm)
+    # 태그 & 엔드포인트 알파벳순으로 정렬
+    tags-sorter: alpha
+    operations-sorter: alpha
+
+#JWT 인증관련 설정
+jwt:
+  header: "Authorization"
+  prefix: "Bearer "
+  secret: "WithtecdkfdisdlDdkIdd25dG4G32sjsedis&sfklsfl#kklsklFDkdjlD6ssa"
+  tokenExpirationTime: 36000
+
+sse:
+  timeout: 300000
+
